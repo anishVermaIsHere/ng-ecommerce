@@ -1,0 +1,119 @@
+<div class="bg-white h-full p-3 md:mr-6 overflow-auto">
+  <h3 class="text-md font-semibold text-right flex justify-between md:text-left mb-3">
+    <button class="static left-2 flex items-center block md:hidden" (click)="onClose()">
+      CLOSE
+      <i class="fa-solid fa-xmark text-xl"></i>
+    </button>
+    <span>
+      <i class="fa-solid fa-filter text-gray-700"></i>
+      Filters
+    </span>
+    
+  </h3>
+
+  <div class="border-y border-gray-300 mb-5">
+    <!-- <div class="py-2">
+      <button class="px-3 py-1 text-sm bg-gray-800 text-white">
+        <i class="fa-solid fa-filter-circle-xmark"></i>
+        Clear Filter
+      </button>
+    </div> -->
+    <h3 class="text-sm font-semibold uppercase ml-3 py-3">Ratings</h3>
+    <div class="">
+      <div class="flex items-center gap-1 pl-4 text-lg rounded dark:border-gray-700 pt-2">
+        <button 
+        type="button"
+        *ngFor="let rate of ratingList; index as i"
+        (click)="applyFilter(i+1,'rating')"
+        >
+          <i class="fa-solid fa-star" *ngIf="rate"></i>
+          <i class="fa-regular fa-star" *ngIf="!rate"></i>
+        </button>
+        <span class="text-sm font-bold">& Up</span>
+      </div>
+      <!-- <div class="text-lg rounded dark:border-gray-700 pt-2 pl-4">
+        
+        <button 
+        type="button"
+        (click)="selectRate(4)"
+        >
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <span class="text-sm ml-2">& Up</span>
+        </button>
+        <br>
+        <button 
+        type="button"
+        (click)="selectRate(3)"
+        >
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <span class="text-sm ml-2 font-bold">& Up</span>
+        </button>
+        <br>
+        <button 
+        type="button"
+        (click)="selectRate(2)"
+        >
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <span class="text-sm ml-2">& Up</span>
+        </button>
+        <br>
+       
+        <button 
+        type="button"
+        class="m-0 p-0"
+        (click)="selectRate(1)"
+        >
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <span class="text-sm ml-2">& Up</span>
+        </button>
+      
+        
+        
+      </div> -->
+
+    </div>
+  </div>
+
+  <div class="border-y border-gray-300 rounded mb-5">
+    <h3 class="text-sm font-semibold uppercase ml-3 py-3">Types</h3>
+    <div class="" *ngFor="let category of filterCategories">
+      <div class="flex items-center pl-4 rounded dark:border-gray-700">
+        <input
+          [checked]="category.checked"
+          id="category-checked"
+          type="checkbox"
+          (change)="applyFilter(category.id,'category')"
+          name="bordered-checkbox"
+          class="w-5 h-5 accent-gray-700 bg-gray-100 border-gray-300 rounded"
+        />
+        <label
+          for="category-checked"
+          class="w-full py-2 ml-2 text-sm font-semibold text-gray-900 dark:text-gray-300"
+        >
+          {{ category.label }}
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <app-pricefilter></app-pricefilter>
+
+
+  
+</div>

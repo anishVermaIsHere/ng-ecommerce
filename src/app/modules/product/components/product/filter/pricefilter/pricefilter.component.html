@@ -1,0 +1,62 @@
+<div class="border-t border-gray-300 rounded mb-5">
+    <h3 class="text-sm font-semibold uppercase ml-3 py-3">Price</h3>
+    <div class="flex m-auto items-center justify-center p-2">
+        <div class="">
+            <div class="py-1 relative min-w-full">
+                <!-- <h5 class="my-6">100 to 100000</h5> -->
+                <div class="flex items-center pb-5">
+                  <div>
+                    <p class="text-sm font-semibold">min</p>
+                    <input 
+                    type="number" 
+                    [value]="minVal"
+                    [step]="step"
+                    (keyup)="onMinChange($event)"
+                    class="px-3 py-2 border border-gray-300 outline-none rounded w-full"
+                    >
+                  </div>
+                  <span class="text-sm mx-3">to</span>
+                  <div>
+                    <p class="text-sm font-semibold">max</p>
+                    <input 
+                    type="number" 
+                    [value]="maxVal"
+                    [step]="step"
+                    (keyup)="onMaxChange($event)"
+                    class="px-3 py-2 border border-gray-300 outline-none rounded w-full"
+                    >
+                  </div>
+                </div>
+                <div class="relative">
+                  <input 
+                    type="range"
+                    step="100"
+                    id="min"
+                    [step]="step"
+                    [max]="max"
+                    [min]="min"
+                    (input)="handleMinRange($event)"
+                    [value]="minVal"
+                    >
+            
+                  <input 
+                    type="range" 
+                    id="max"
+                    [step]="step"
+                    [max]="max"
+                    [min]="min"
+                    (input)="handleMaxRange($event)"
+                    [value]="maxVal"
+                    >
+            
+                  <div class="relative z-10 h-[3px] bg-gray-200">
+                    <div class="absolute z-10 bottom-0 top-0 rounded-md bg-gray-700" #progress></div>
+                  </div>
+            
+                </div>
+                
+            </div>            
+        </div>
+    
+    </div>
+  </div> 

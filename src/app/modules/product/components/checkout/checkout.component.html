@@ -1,0 +1,231 @@
+<section class="mb-12 pt-2 pb-8 px-4 bg-white">
+    <h3 class="text-3xl font-semibold text-gray-700 text-center mb-3">
+        <i title="Checkout" class="fa-solid fa-lock mr-2"></i>
+        Checkout
+    </h3>
+    
+<ol class="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base pb-5">
+  <li class="flex md:w-full items-center text-[#3c64a9] dark:text-[#3c64a9] sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+      <span class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
+          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+          </svg>
+          Shipping <span class="hidden sm:inline-flex sm:ml-2">Info</span>
+      </span>
+  </li>
+  <li class="flex md:w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+      <span class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
+          <span class="mr-2">2</span>
+          Payment <span class="hidden sm:inline-flex sm:ml-2">Method</span>
+      </span>
+  </li>
+  <li class="flex items-center">
+      <span class="mr-2">3</span>
+      Delivery
+  </li>
+</ol>
+
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 h-full">
+    <article class="col-span-1 lg:col-span-2 md:pr-10">
+        <h2 class="text-2xl font-semibold leading-7 text-gray-600">Billing Details</h2>
+        <form [formGroup]="shippingForm" (ngSubmit)="onSave()">
+            <div class="space-y-12">
+              <div class="border-b border-gray-900/10 pb-12">               
+                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                  <div class="sm:col-span-3">
+                    <label for="firstName" class="block text-sm font-medium leading-6 text-gray-900">First name</label>
+                    <div class="mt-2">
+                      <input type="text" name="firstName" formControlName="firstName" id="firstName" autocomplete="given-name" 
+                      [ngClass]="firstName && firstName.invalid && firstName.touched ? 'border border-red-400 block w-full p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6' :'block w-full  border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6'">
+                    </div>
+                    <p *ngIf="firstName && firstName.invalid && firstName.touched" class="text-sm text-red-400">
+                      * First name required
+                    </p>
+                  </div>
+          
+                  <div class="sm:col-span-3">
+                    <label for="lastName" class="block text-sm font-medium leading-6 text-gray-900">Last name</label>
+                    <div class="mt-2">
+                      <input type="text" name="lastName" formControlName="lastName" id="lastName" autocomplete="lastName" 
+                      [ngClass]="lastName && lastName.invalid && lastName.touched ? 'border border-red-400 block w-full p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6':
+                      'block w-full  border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6'">
+                    </div>
+                    <p *ngIf="lastName && lastName.invalid && lastName.touched" class="text-sm text-red-400">
+                      * Last name must be atleast 3 characters long
+                    </p>
+                  </div>
+          
+                  <div class="sm:col-span-2">
+                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+                    <div class="mt-2">
+                      <input  type="email" id="email" name="email" formControlName="email" autocomplete="email" 
+                      [ngClass]="email && email.invalid && email.touched ? 'border border-red-400 block w-full p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6':
+                      'block w-full border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6'">
+                    </div>
+                    <p *ngIf="email && email.invalid && email.touched" class="text-sm text-red-400">
+                      * Email required
+                    </p>
+                  </div>
+          
+                  <div class="sm:col-span-2">
+                    <label for="mobile" class="block text-sm font-medium leading-6 text-gray-900">Mobile No.</label>
+                    <div class="mt-2">
+                      <input type="number" name="mobile" id="mobile" formControlName="mobile" autocomplete="mobile" 
+                      [ngClass]="mobile && mobile.invalid && mobile.touched ? 'border border-red-400 block w-full p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none':'block w-full border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'">
+                    </div>
+                    <p *ngIf="mobile && mobile.invalid && mobile.touched" class="text-sm text-red-400">
+                      * Mobile No. required
+                    </p>
+                  </div>
+
+                  <div class="sm:col-span-2">
+                    <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Country</label>
+                    <div class="mt-2">
+                      <select id="country" name="country" formControlName="country" autocomplete="country-name" 
+                      class="block w-full border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-inset focus:ring-gray-500 sm:max-w-xs sm:text-sm sm:leading-6">
+                        <option>India</option>
+                        <option>Sri Lanka</option>
+                        <option>Nepal</option>
+                        <option>Bangladesh</option>
+                        <option>Pakistan</option>
+                      </select>
+                    </div>
+                    
+                  </div>
+
+                  <div class="col-span-full">
+                    <label for="address" class="block text-sm font-medium leading-6 text-gray-900">Street address</label>
+                    <div class="mt-2">
+                      <input type="text" name="address" formControlName="address" id="address" autocomplete="address" 
+                      [ngClass]="address && address.invalid && address.touched?'border border-red-400 block w-full border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6':'block w-full  border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6'">
+                    </div>
+                    <p *ngIf="address && address.invalid && address.touched" class="text-sm text-red-400">
+                      * Address required
+                    </p>
+                  </div>
+          
+                  <div class="sm:col-span-2 sm:col-start-1">
+                    <label for="city" class="block text-sm font-medium leading-6 text-gray-900">City</label>
+                    <div class="mt-2">
+                      <input type="text" name="city" id="city" formControlName="city" autocomplete="city" 
+                      [ngClass]="city && city.invalid && city.touched?'border border-red-400 block w-full border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6':'block w-full  border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6'">
+                    </div>
+                    <p *ngIf="city && city.invalid && city.touched" class="text-sm text-red-400">
+                      * City required
+                    </p>
+                  </div>
+          
+                  <div class="sm:col-span-2">
+                    <label for="state" class="block text-sm font-medium leading-6 text-gray-900">State</label>
+                    <div class="mt-2">
+                      <input type="text" name="state" id="state" formControlName="state" autocomplete="state" 
+                      [ngClass]="state && state.invalid && state.touched?'border border-red-400 block w-full border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6':'block w-full  border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6'">
+                    </div>
+                    <p *ngIf="state && state.invalid && state.touched" class="text-sm text-red-400">
+                      * State required
+                    </p>
+                  </div>
+          
+                  <div class="sm:col-span-2">
+                    <label for="postalCode" class="block text-sm font-medium leading-6 text-gray-900">PIN/ Postal code</label>
+                    <div class="mt-2">
+                      <input type="number" name="postalCode"  formControlName="postalCode" id="postalCode" autocomplete="postalCode" 
+                      [ngClass]="postalCode && postalCode.invalid && postalCode.touched?'border border-red-400 block w-full  border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none':'block w-full  border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'">
+                    </div>
+                    <p *ngIf="postalCode && postalCode.invalid && postalCode.touched" class="text-sm text-red-400">
+                      * Pin code required
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="relative flex gap-x-3">
+                <div class="flex h-6 items-center">
+                  <input id="comments" name="comments" type="checkbox" class="h-4 w-4 rounded border-gray-300 accent-gray-700 text-indigo-600 focus:ring-indigo-600">
+                  <label for="comments" class="leading-6 ml-2 font-medium text-gray-900"> 
+                    <p class="mt-1 text-md leading-6 text-gray-600">
+                    Use as permanent address
+                  </p>
+                  </label>
+                </div>
+              </div>
+            </div>
+          
+            <div class="mt-6 flex items-center justify-end gap-x-6">
+              <button 
+              type="button" 
+              class="text-sm font-semibold leading-6 text-gray-900">
+              Cancel
+            </button>
+              <button 
+              type="submit" 
+              [disabled]="shippingForm.invalid"
+              class="bg-gray-700 px-12 py-3 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500">
+                Save
+              </button>
+            </div>
+          </form>
+          
+    </article>
+    <article class="col-span-1 lg:col-span-1 mb-4">
+        <div class="flex flex-col">
+            <div class="flex-1">
+                <h3 class="text-2xl font-semibold text-gray-600">Order summary</h3>
+                <!-- <label for="promo-code" class="font-semibold text-gray-600">ENTER PROMO CODE</label>
+                <div class="flex flex-1 border border-gray-600">
+                    <input type="text" name="promo-code" class="p-4 w-full">
+                    <button type="submit" class="px-16 py-4 text-center text-white bg-gray-800">Submit</button>
+                </div> -->
+            </div>
+            <div>
+            <div class="mt-8">
+                <div class="flex justify-between pb-3">
+                    <div>
+                        <span class="text-xl text-gray-600">Shipping Cost</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xl text-gray-600">&#8377;0.00</span>
+                    </div>
+                </div>
+                <div class="flex justify-between pb-3">
+                    <div>
+                        <span class="text-xl text-gray-600">Discount</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xl text-gray-600">&#8377;0.00</span>
+                    </div>
+                </div>
+                <div class="flex justify-between pb-3">
+                    <div>
+                        <span class="text-xl text-gray-600">GST</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xl text-gray-600">{{gstAmount}}</span>
+                    </div>
+                </div>
+
+                <div class="flex justify-between pt-8">
+                    <div>
+                        <span class="text-2xl font-semibold">Order Total</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-2xl font-semibold">&#8377;{{grandTotal}}</span>
+                    </div>
+                </div>
+
+            </div>
+                
+            </div>
+            <div class="flex justify-center mt-60">
+                <button 
+                type="submit" 
+                class="w-[80%] px-16 py-4 text-center font-semibold text-white bg-[#3c64a9]">
+                    <i class="fa-solid fa-lock mr-2"></i>
+                    Place order
+                </button>
+            </div>
+        </div>
+    </article>
+  </div>
+</section>

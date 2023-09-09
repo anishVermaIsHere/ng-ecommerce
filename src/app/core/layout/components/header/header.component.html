@@ -1,0 +1,142 @@
+<header class="mb-4">
+  <nav class="px-2 md:px-6 lg:px-10 md:py-2">
+    <div class="flex justify-between items-center">
+        <a routerLink="/" class="flex flex-col items-center cursor-pointer">
+          <img src="assets/images/logo.png" alt="brand" class="w-[40px] md:w-[50px]" />
+          <span class="text-sm font-semibold text-white bg-[#3c64a9] px-3 rounded rotate-6 hidden md:block">
+            BACK 2 BUY
+          </span>
+        </a>
+      
+      <div class="">
+        <ul class="top-nav-menu">
+          <li class="top-nav-menu-item">
+            <a
+              class="mr-4 py-1 flex-col md:flex-row"
+              [routerLink]="['/wishlist']"
+            >
+              <i title="Wishlist" class="fa-regular fa-heart"></i>
+              <span class="md:hidden text-xs">Wishlist</span>
+            </a>
+          </li>
+          <li class="top-nav-menu-item">
+            <a class="relative mr-4 py-1 flex-col md:flex-row" [routerLink]="['/shopping-cart']">
+              <i title="Shopping Cart" class="fa-solid fa-bag-shopping"></i>
+              <span class="md:hidden text-xs">Cart</span>
+              <span 
+              *ngIf="cart.length>0" 
+              class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-gray-800 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
+                {{cart.length}}
+              </span>
+            </a>
+          </li>
+          <li class="top-nav-menu-item" *ngIf="!authService.isLoggedIn()">
+            <a class="py-1 flex-col md:flex-row" [routerLink]="['/login']">
+              <i title="Login" class="fa-regular fa-user"></i>
+              <span class="md:hidden text-xs">Login</span>
+            </a>
+          </li>
+          <li class="top-nav-menu-item" *ngIf="authService.isLoggedIn()">
+            <button class="py-1 flex-col md:flex-row" (click)="logOut()">
+              <i title="Logout" class="fa-solid fa-arrow-right-from-bracket"></i>
+              <span class="text-xs">Logout</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-6 border-b border-gray-300 hidden md:block">
+      <ul class="bottom-nav-menu text-md uppercase">
+        <li class="bottom-nav-menu-item" *ngFor="let menu of menulist">
+          <a
+            class="px-2 py-1 transition-all duration-900"
+            [routerLink]="[menu.path]"
+            [routerLinkActive]="['active-link']"
+            [attr.aria-label]="menu.title+' '+'link'"
+          >
+          {{menu.title}}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="flex justify-end items-center px-1 md:px-10 w-full">
+    <div class="block md:hidden flex items-center gap-2 mr-2 cursor-pointer" (click)="openMenu()">
+      <i class="fa-sharp fa-solid fa-bars text-md"></i>
+      MENU
+    </div>
+
+    <div class="fixed top-0 left-0 w-[350px] z-[99] h-full drop-shadow-lg bg-white block md:hidden" *ngIf="isMenu">
+      <div class="h-full">
+        <button class="absolute right-4 flex items-center" (click)="closeMenu()">
+          CLOSE <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+        <ul class="pt-12 flex flex-col gap-5 text-md uppercase">
+          <li class="bottom-nav-menu-item" *ngFor="let menu of menulist">
+            <a
+              class="px-4 py-1 border-b-2 block hover:pl-12 transition-all duration-1000"
+              [routerLink]="[menu.path]"
+              [routerLinkActive]="['active-link']"
+             [attr.aria-label]="menu.title+' '+'link'"
+             (click)="closeMenu()"
+            >
+              {{menu.title}}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- <div
+      class="relative md:mb-4 flex w-full md:w-[300px] transition-all duration-300 bg-transparent focus-within:w-full border-2 focus-within:border-gray-600 rounded"
+    >
+      <span
+        class="input-group-text flex items-center whitespace-nowrap rounded bg-white px-3 py-1.5 text-center text-base font-normal text-neutral-700 dark:text-neutral-200"
+        id="basic-addon2"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="h-5 w-5"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </span>
+      <input
+        type="search"
+        name="seach"
+        placeholder="Search products..."
+        aria-label="Search"
+        class="relative m-0 block w-[1px] min-w-0 flex-auto focus:z-[3] p-2 md:p-3 outline-none rounded w-full"
+      />
+      
+    </div> -->
+
+    <div class="relative md:mb-4 w-full md:w-[300px] transition-all duration-300 bg-transparent focus-within:w-full border-2 focus-within:border-gray-600 rounded">
+      <app-search></app-search>
+    </div>
+  </div>
+
+  <nav>
+    <div class="mt-2 border-b border-gray-300 md:hidden">
+      <ul class="flex justify-center flex-wrap text-xs uppercase">
+        <li class="my-2" *ngFor="let menu of menulist">
+          <a
+            class="px-1 py-1 transition-all duration-900"
+            [routerLink]="[menu.path]"
+            [routerLinkActive]="['active-link']"
+            [attr.aria-label]="menu.title+' '+'link'"
+          >
+          {{menu.title}}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+</header>

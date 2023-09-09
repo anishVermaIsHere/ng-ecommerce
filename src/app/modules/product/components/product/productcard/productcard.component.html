@@ -1,0 +1,92 @@
+<div class="relative flex flex-row justify-between mx-auto md:flex-col w-full max-w-md bg-white hover:border border-gray-300">
+        <a [routerLink]="['/categories','product',product.id]" class="w-[50%] sm:w-[40%] md:w-full overflow-hidden">
+            <img 
+            [ngClass]="{'rounded-t-lg transition-all duration-500 hover:scale-110 grayscale':product.stock=='Out of stock',
+            'rounded-t-lg transition-all duration-500 hover:scale-110':product.stock=='In stock'}" 
+            [src]="product.images[0]" 
+            [alt]="product.title" />
+        </a>
+        
+        <div class="flex flex-col justify-stretch self-center p-5 md:p-2 w-[60%] md:w-full">
+            <a [routerLink]="['/categories','product',product.id]">
+                <h5 class="mb-2 font-semibold text-sm tracking-tight text-gray-900 dark:text-white ">{{product.title | slice:0:45}}...</h5>
+            </a>
+            <p class="text-sm text-gray-700 dark:text-gray-400">
+               <span class="font-bold mr-3">&#8377;{{product.price}}</span> 
+               <span class="line-through mr-3" *ngIf="product.prevprice!=0">&#8377;{{product.prevprice}}</span> 
+               <span class="text-xs font-bold text-red-700" *ngIf="product.prevprice!==0">(-{{discount}}%)</span> 
+            </p>
+            
+            <p class="flex items-center">
+                <span class="mr-1.5">{{product.rating.rate}}</span>
+                <span *ngFor="let ratestar of ratingList">
+                    <i class="fa-solid fa-star" *ngIf="ratestar"></i>
+                  </span>
+                  <span *ngFor="let ratestar of ratingList">
+                    <i class="fa-regular fa-star" *ngIf="!ratestar" ></i>
+                  </span>
+                <span class="ml-2 text-xs">({{product.rating.count}})</span>
+            </p>
+            
+            <button 
+            *ngIf="isProductInCart(product); else addtocart"
+            class="px-4 py-1 bg-red-700 text-gray-200 w-full"
+            aria-label="Remove from Cart"
+            (click)="removeFromCart(product)"
+            >
+            <i class="fa-solid fa-trash mr-2"></i>
+            Remove
+            </button>
+
+            <ng-template #addtocart>
+                <button 
+                class="px-4 py-1 bg-gray-800 text-gray-200 w-full"
+                aria-label="Add to Cart"
+                (click)="addToCart(product)"
+                *ngIf="product.stock=='In stock'"
+                >
+                    <i title="Shopping Cart" class="fa-solid fa-bag-shopping mr-2"></i>
+                    Add
+                </button>
+
+                <div 
+                class="px-4 py-1 bg-yellow-600 text-center text-gray-200 w-full cursor-not-allowed"
+                disabled
+                aria-label="Available soon"
+                *ngIf="product.stock=='Out of stock'"
+                >Available soon
+                </div>
+
+            </ng-template>
+            
+            
+
+            <div class="absolute top-2 left-5 md:right-5 flex justify-end gap-4 items-center">
+                <!-- <button 
+                aria-label="add to cart"
+                class="bg-white border border-gray-300 rounded h-[35px] w-[35px] "
+                title="Add to Cart"
+                >
+                   <i class="fa-solid fa-bag-shopping hover:scale-125 transition-all duration-200"></i>
+                </button> -->
+
+                <span *ngIf="product.stock=='In stock'; else outofstock" class="w-[80px] bg-green-600 text-white text-center text-xs p-1 rounded">
+                    {{product.stock}}
+                </span>
+                <ng-template #outofstock>
+                    <span class="w-[80px] bg-yellow-600 text-white text-center text-xs p-1 rounded" >
+                    {{product.stock}}
+                    </span>
+                </ng-template>
+                
+                <button 
+                aria-label="add to wishlist"
+                class="bg-white border border-gray-300 rounded h-[35px] w-[35px]"
+                title="Add to Wishlist"
+                >
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+            
+        </div>
+</div>

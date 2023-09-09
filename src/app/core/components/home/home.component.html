@@ -1,0 +1,49 @@
+
+
+<section class="w-full flex-1">
+    <app-carousel [slideImages]="images"></app-carousel>
+    <article class="mb-5">
+        <h3 class="text-2xl font-semibold mb-5">NEW ARRIVALS</h3>
+        <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-5">
+            <div *ngFor="let product of products" class="relative flex flex-row justify-between mx-auto md:flex-col w-full max-w-md bg-white hover:border border-gray-300">
+                <a [routerLink]="['categories','product',product.id]" class="w-[50%] sm:w-[40%] md:w-full overflow-hidden">
+                    <img 
+                    class="transition-all duration-500 hover:scale-110 "
+                    [src]="product.images[0]" 
+                    [alt]="product.title" />
+                </a>
+                
+                <div class="flex flex-col justify-stretch self-center p-5 w-[60%] md:w-full">
+                    <a [routerLink]="['categories','product',product.id]">
+                        <h5 class="mb-2 text-sm tracking-tight text-gray-900 dark:text-white ">{{product.title}}</h5>
+                    </a>
+                    <p class="text-sm text-gray-700 dark:text-gray-400">
+                       <span class="font-bold mr-3">&#8377;{{product.price}}</span> 
+                       <span class="line-through mr-3">&#8377;{{product.prevprice}}</span> 
+                    </p>                    
+        
+                    <div class="absolute top-2 left-5 md:right-5 flex justify-end gap-4 items-center">
+        
+                        <span *ngIf="product.stock=='In stock'; else outofstock" class="w-[80px] bg-green-600 text-white text-center text-xs p-1 rounded">
+                            {{product.stock}}
+                        </span>
+                        <ng-template #outofstock>
+                            <span class="w-[80px] bg-yellow-600 text-white text-center text-xs p-1 rounded" >
+                            {{product.stock}}
+                            </span>
+                        </ng-template>
+                        
+                        <button 
+                        aria-label="add to wishlist"
+                        class="bg-white border border-gray-300 rounded h-[35px] w-[35px]"
+                        title="Add to Wishlist"
+                        >
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+        </div>
+
+        </div>
+    </article>
+</section>

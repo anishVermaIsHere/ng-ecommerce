@@ -1,0 +1,134 @@
+
+<section class="flex justify-center items-center h-[60vh]" *ngIf="error">
+    <div class="text-red-500 flex flex-col justify-center items-center">
+      <i class="fa-solid fa-circle-exclamation text-6xl"></i>
+    <h4 class="text-md px-4 py-2">HTTP ERROR Occured</h4>
+  </div>
+</section>
+
+<ng-template #empty>
+    <section class="flex justify-center items-center h-[60vh]">
+        <div class="text-gray-500 flex flex-col justify-center items-center">
+        <span class="">
+            <svg class="svg-icon" style="height:4rem;width:4rem;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M504.1 452.5c-18.3 0-36.5-4.1-50.7-10.1l-280.1-138c-18.3-10.1-30.4-24.4-30.4-40.6 0-16.2 10.2-32.5 30.4-42.6L455.4 77.1c16.2-8.1 34.5-12.2 54.8-12.2 18.3 0 36.5 4.1 50.7 10.1L841 213c18.3 10.1 30.4 24.4 30.4 40.6 0 16.2-10.1 32.5-30.4 42.6L558.9 440.3c-16.3 8.1-34.5 12.2-54.8 12.2zM193.6 261.7l280.1 138c8.1 4.1 18.3 6.1 30.4 6.1 12.2 0 24.4-2 32.5-6.1l284.1-144.1-280.1-138c-8.1-4.1-18.3-6.1-30.4-6.1-12.2 0-24.4 2-32.5 6.1L193.6 261.7z m253.6 696.1c-10.1 0-20.3-2-30.4-8.1L165.1 817.8c-30.4-14.2-52.8-46.7-52.8-73.1V391.6c0-24.4 18.3-42.6 44.6-42.6 10.1 0 20.3 2 30.4 8.1L437.1 489c30.4 14.2 52.8 46.7 52.8 73.1v353.1c0 24.4-18.3 42.6-42.7 42.6z m-10.1-48.7c2 2 4.1 2 6.1 2v-349c0-8.1-10.1-24.4-26.4-32.5L165.1 397.7c-2-2-4.1-2-6.1-2v349.1c0 8.1 10.2 24.4 26.4 32.5l251.7 131.8z m144.1 48.7c-24.4 0-42.6-18.3-42.6-42.6V562.1c0-26.4 22.3-58.9 52.8-73.1L841 357.1c10.1-4.1 20.3-8.1 30.4-8.1 24.4 0 42.6 18.3 42.6 42.6v353.1c0 26.4-22.3 58.9-52.8 73.1L611.6 949.7c-12.2 6.1-20.3 8.1-30.4 8.1z m280-560.1L611.6 529.6c-16.2 8.1-26.4 24.4-26.4 32.5v349.1c2 0 4.1-2 6.1-2l249.6-131.9c16.2-8.1 26.4-24.4 26.4-32.5V395.7c-2 0-4 2-6.1 2z m0 0"  /></svg>
+        </span>
+        
+        <h4 class="text-md px-4 py-2">NO RESULTS</h4>       
+    </div>
+    </section>
+</ng-template>
+
+<div class="flex justify-center items-center h-screen"  *ngIf="isLoading">
+    <div role="status">
+        <svg aria-hidden="true" class="inline w-12 h-12 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+        </svg>
+        <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  
+  <section class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 bg-white" *ngIf="products.length>0 && !isLoading; else empty">
+      <aside class="col-span-1 md:col-span-1 lg:col-span-1 mb-4">
+        <!-- <app-filter [products]="products" [category]="category">
+        </app-filter>    -->
+        <ng-template>
+          <div class="flex justify-center">No filters</div>
+        </ng-template>
+      </aside>
+      <article class="col-span-1 md:col-span-2 lg:col-span-3">        
+        <div class="mb-4">
+            <h4 class="text-gray-500 font-semibold">Search results: for <span class="text-gray-800">{{searchKeyword}}</span></h4>
+        </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div 
+            *ngFor="let product of products"
+            class="relative flex flex-row justify-between mx-auto md:flex-col w-full max-w-md bg-white hover:border border-gray-300">
+                <a [routerLink]="['/categories','product',product.id]" class="w-[50%] sm:w-[40%] md:w-full overflow-hidden">
+                    <img 
+                    [ngClass]="{'rounded-t-lg transition-all duration-500 hover:scale-110 grayscale':product.stock=='Out of stock',
+                    'rounded-t-lg transition-all duration-500 hover:scale-110':product.stock=='In stock'}" 
+                    [src]="product.images[0]" 
+                    [alt]="product.title" />
+                </a>
+                
+                <div class="flex flex-col justify-stretch self-center p-5 w-[60%] md:w-full">
+                    <a [routerLink]="['/categories','product',product.id]">
+                        <h5 class="mb-2 font-semibold text-sm tracking-tight text-gray-900 dark:text-white ">{{product.title}}</h5>
+                    </a>
+                    <p class="text-sm text-gray-700 dark:text-gray-400">
+                       <span class="font-bold mr-3">&#8377;{{product.price}}</span> 
+                       <span class="line-through mr-3">&#8377;{{product.prevprice}}</span> 
+                       <!-- <span class="p-1 text-xs font-bold bg-green-200 text-green-700 rounded" *ngIf="product.prevprice!==0">{{discount}}% OFF</span>  -->
+                    </p>
+                    <p class="flex items-center">
+                        <span>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </span>
+                        <span class="ml-2 text-xs">({{product.rating.count}})</span>
+                    </p>
+                    
+                    <!-- <button 
+                    *ngIf="isProductInCart(product); else addtocart"
+                    class="px-4 py-1 bg-red-700 text-gray-200 w-full"
+                    aria-label="Remove from Cart"
+                    (click)="removeFromCart(product)"
+                    >
+                    <i class="fa-solid fa-trash mr-2"></i>
+                    Remove
+                    </button> -->
+        
+                    <!-- <ng-template #addtocart>
+                        <button 
+                        class="px-4 py-1 bg-gray-800 text-gray-200 w-full"
+                        aria-label="Add to Cart"
+                        (click)="addToCart(product)"
+                        *ngIf="product.stock=='In stock'"
+                        >
+                            <i title="Shopping Cart" class="fa-solid fa-bag-shopping mr-2"></i>
+                            Add
+                        </button>
+        
+                        <div 
+                        class="px-4 py-1 bg-yellow-600 text-center text-gray-200 w-full cursor-not-allowed"
+                        disabled
+                        aria-label="Available soon"
+                        *ngIf="product.stock=='Out of stock'"
+                        >Available soon
+                        </div>
+        
+                    </ng-template> -->
+                    
+                    
+        
+                    <div class="absolute top-2 left-5 md:right-5 flex justify-end gap-4 items-center">        
+                        <span *ngIf="product.stock=='In stock'; else outofstock" class="w-[80px] bg-green-600 text-white text-center text-xs p-1 rounded">
+                            {{product.stock}}
+                        </span>
+                        <ng-template #outofstock>
+                            <span class="w-[80px] bg-yellow-600 text-white text-center text-xs p-1 rounded" >
+                            {{product.stock}}
+                            </span>
+                        </ng-template>
+                        
+                        <button 
+                        aria-label="add to wishlist"
+                        class="bg-white border border-gray-300 rounded h-[35px] w-[35px]"
+                        title="Add to Wishlist"
+                        >
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    </div>
+                    
+                </div>
+        </div>
+          </div>
+      </article>
+  </section>
+  
+  
+  

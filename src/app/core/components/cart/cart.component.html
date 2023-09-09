@@ -1,0 +1,96 @@
+<section class="border-blue-500 ">
+    <h3 class="text-3xl font-semibold text-gray-700 text-center mb-3">
+        <i title="Shopping Cart" class="fa-solid fa-bag-shopping mr-2"></i>
+        My Cart
+    </h3>
+    <ng-template #empty>
+        <section class="flex justify-center items-center h-[60vh]">
+            <div class="text-gray-500 flex flex-col justify-center items-center">
+            <span class="text-4xl">
+                <i class="fa-solid fa-bag-shopping"></i>
+            </span>
+            <h4 class="text-2xl px-4 py-2">NO ITEMS IN CART</h4>
+            <a [routerLink]="['/']" 
+            class="px-4 py-2 mt-5 bg-gray-800 text-white">
+                Go to Shopping
+            </a>
+        </div>
+        </section>
+    </ng-template>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 h-full" *ngIf="cart.length>0; else empty">
+    <article class="col-span-1 md:col-span-2 lg:col-span-2 ">
+        <div class="border-y-2 border-gray-300 overflow-y-auto h-[480px] p-2">
+            <app-cartitem 
+            *ngFor="let item of cart"
+            [item]="item"
+            >
+            </app-cartitem>
+        </div>
+       
+        <div class="flex justify-between pt-3">
+            <div class="text-lg font-semibold">Items: {{cart.length}}</div>
+            <div class="text-lg font-semibold">Total : <span class="ml-4">&#8377;{{total}}</span></div>
+        </div>
+    </article>
+    <article class="col-span-1 md:col-span-1 lg:col-span-1 mb-4">
+        <div class="flex flex-col">
+            <div class="flex-1">
+                <label for="promo-code" class="font-semibold text-gray-600">ENTER PROMO CODE</label>
+                <div class="flex flex-1 sm:flex-col lg:flex-row border border-gray-600">
+                    <input type="text" name="promo-code" class="p-4 w-full">
+                    <button type="submit" class="px-8 py-4 lg:px-16 text-center text-white bg-gray-800">Submit</button>
+                </div>
+            </div>
+            <div>
+            <div class="mt-8">
+                <div class="flex justify-between pb-3">
+                    <div>
+                        <span class="text-xl text-gray-600">Shipping Cost</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xl text-gray-600">&#8377;0.00</span>
+                    </div>
+                </div>
+                <div class="flex justify-between pb-3">
+                    <div>
+                        <span class="text-xl text-gray-600">Discount</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xl text-gray-600">&#8377;0.00</span>
+                    </div>
+                </div>
+                <div class="flex justify-between pb-3">
+                    <div>
+                        <span class="text-xl text-gray-600">GST(18%)</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xl text-gray-600">{{gstAmount}}</span>
+                    </div>
+                </div>
+
+                <div class="flex justify-between pt-8">
+                    <div>
+                        <span class="text-2xl font-semibold">Estimated Total</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-2xl font-semibold">&#8377;{{estimatedTotal}}</span>
+                    </div>
+                </div>
+
+            </div>
+                
+            </div>
+            <div class="flex justify-center mt-60">
+                <button 
+                type="submit" 
+                (click)="goToCheckout()"
+                class="w-[80%] px-16 lg:px-20 py-4 text-center font-semibold text-white bg-[#3c64a9]">
+                    <i class="fa-solid fa-lock mr-2"></i>
+                    Checkout
+                </button>
+            </div>
+        </div>
+    </article>
+    </div>
+</section>

@@ -1,0 +1,136 @@
+
+
+<div class="flex justify-center items-center h-screen"  *ngIf="isLoading">
+  <div role="status">
+      <svg aria-hidden="true" class="inline w-12 h-12 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+          <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+      </svg>
+      <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<section class="py-4 bg-white" *ngIf="!isLoading">
+  <app-breadcrumb></app-breadcrumb>
+  <article class="grid grid-cols-1 md:grid-cols-2">
+    <div class="flex flex-col md:flex-row col-span-2 md:col-span-1 mx-auto md:mx-0">
+        <div class="flex flex-wrap flex-row md:flex-col gap-2 order-2 md:order-1">
+            <div 
+            [ngClass]="selectedImage==i?'w-28 cursor-pointer border border-gray-400':'w-28 cursor-pointer'" 
+            *ngFor="let image of images; index as i">
+                <img class="object-center" [src]="image" [alt]="title" (click)="onImage(image,i)">
+            </div>
+        </div>
+
+        <div class="mx-auto order-1 md:order-2">
+            <img class="w-full object-cover object-center" [src]="imageSrc" [alt]="title">
+        </div>
+    </div>
+    <div class="col-span-1 md:col-span-1 md:px-6 lg:px-10 py-4">
+        <h4 class="text-lg text-gray-600">Brand Name</h4>
+        <h3 class="font-bold text-2xl">{{title}}</h3>
+        <p class="text-sm text-gray-600">{{product.type}}</p>
+
+        <div class="flex items-center my-3">
+          <span class="text-md mr-2">{{product.rating.rate}}</span>
+          <span *ngFor="let ratestar of ratingList">
+            <i class="fa-solid fa-star text-orange-400" *ngIf="ratestar"></i>
+          </span>
+          <span *ngFor="let ratestar of ratingList">
+            <i class="fa-regular fa-star text-orange-400" *ngIf="!ratestar" ></i>
+          </span>
+          <span class="ml-2 text-md">{{product.rating.count}} Reviews</span>
+        </div>
+
+        <div>
+          <p class="leading-relaxed text-gray-700">
+            {{product.description}}.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor vero laudantium error porro voluptatibus animi aliquid autem, iste iusto facere? Laborum reprehenderit minima officia voluptate et quod. Dolorem, repellat quia!
+          </p>
+        </div>
+
+        <div class="flex">
+          <p class="mt-4 text-2xl font-bold">&#8377;{{product.price}}</p>
+          <p class="ml-4 mt-4 text-2xl text-gray-600 line-through" *ngIf="product.prevprice!==0">&#8377;{{product.prevprice}}</p>
+          <p class="ml-4 mt-5 text-xl text-red-700" *ngIf="product.prevprice!==0">-{{discount}}%</p> 
+        </div>
+
+        <div class="flex flex-wrap gap-2 mt-4">
+          <button 
+          *ngFor="let size of product.sizes; let i"
+          [ngClass]="selectedSize == i ? 'h-23 w-23 py-2 w-1/4 border-2 border-[#3c64a9] bg-[#3c64a9] text-white transitiion-all duration-150':
+          'h-23 w-23 py-2 w-1/4 border-2 border-[#3c64a9] hover:bg-[#3c64a9] hover:text-white transitiion-all duration-150'" 
+          (click)="addSize(size,i)">
+            <span>
+              {{size}}
+            </span>
+          </button>
+        </div>
+
+        <div class="w-full flex flex-col lg:flex-row gap-4 mt-6">
+            <div *ngIf="product.stock=='Out of stock'" class="py-4 px-10 text-center font-semibold text-yellow-600 text-white">
+                NOT AVAILABLE
+          </div>
+          <ng-template #addtocart>
+            <button 
+            *ngIf="product.stock=='In stock'"
+            class="py-4 px-10 bg-gray-800 text-white"
+            (click)="addToCart(product)">
+              <i title="Shopping Cart" class="fa-solid fa-bag-shopping mr-2"></i>
+              ADD TO CART
+            </button>
+          </ng-template>
+          <button 
+          class="py-4 px-16 bg-red-800 text-white"
+          (click)="removeFromCart(product)"
+          *ngIf="isProductInCart(product); else addtocart">
+            <i class="fa-solid fa-trash mr-2"></i>
+            REMOVE
+          </button>
+
+          <button class="">
+            <i title="Shopping Cart" class="fa-regular fa-heart mr-2"></i>
+            ADD TO WISHLIST
+          </button>
+        </div>
+
+        <div class="mt-10">
+          <h3 class="text-xl font-bold">Product Details</h3>
+          <div>
+            <h5 class="text-lg font-semibold text-gray-600">GENERAL INFORMATION</h5>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex, officia nihil. 
+              Non rem at quasi earum fuga debitis animi hic expedita porro totam quaerat ut adipisci, 
+              cupiditate ea. Tempore, atque?
+            </p>
+          </div>
+        </div>
+    </div>
+    
+  </article>
+</section>
+
+<section class="mt-25 mb-10 bg-white pt-5" *ngIf="relatedProductList.length!==0">
+  <h3 class="text-2xl font-semibold mb-5">RELATED PRODUCTS</h3>
+  <article class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 bg-white">
+    <app-productcard
+    *ngFor="let relatedProduct of relatedProductList"
+    [product]="relatedProduct"
+    ></app-productcard>
+  </article>
+</section>
+
+<div class="text-gray-500 flex flex-col py-50 h-[300px] justify-center items-center" *ngIf="relatedProductList.length==0">
+  <span class="">
+      <svg class="svg-icon" 
+      style="height:4rem;width:4rem;vertical-align: middle;fill: currentColor;overflow: hidden;" 
+      viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <path d="M504.1 452.5c-18.3 0-36.5-4.1-50.7-10.1l-280.1-138c-18.3-10.1-30.4-24.4-30.4-40.6 0-16.2 10.2-32.5 30.4-42.6L455.4 77.1c16.2-8.1 34.5-12.2 54.8-12.2 18.3 0 36.5 4.1 50.7 10.1L841 213c18.3 10.1 30.4 24.4 30.4 40.6 0 16.2-10.1 32.5-30.4 42.6L558.9 440.3c-16.3 8.1-34.5 12.2-54.8 12.2zM193.6 261.7l280.1 138c8.1 4.1 18.3 6.1 30.4 6.1 12.2 0 24.4-2 32.5-6.1l284.1-144.1-280.1-138c-8.1-4.1-18.3-6.1-30.4-6.1-12.2 0-24.4 2-32.5 6.1L193.6 261.7z m253.6 696.1c-10.1 0-20.3-2-30.4-8.1L165.1 817.8c-30.4-14.2-52.8-46.7-52.8-73.1V391.6c0-24.4 18.3-42.6 44.6-42.6 10.1 0 20.3 2 30.4 8.1L437.1 489c30.4 14.2 52.8 46.7 52.8 73.1v353.1c0 24.4-18.3 42.6-42.7 42.6z m-10.1-48.7c2 2 4.1 2 6.1 2v-349c0-8.1-10.1-24.4-26.4-32.5L165.1 397.7c-2-2-4.1-2-6.1-2v349.1c0 8.1 10.2 24.4 26.4 32.5l251.7 131.8z m144.1 48.7c-24.4 0-42.6-18.3-42.6-42.6V562.1c0-26.4 22.3-58.9 52.8-73.1L841 357.1c10.1-4.1 20.3-8.1 30.4-8.1 24.4 0 42.6 18.3 42.6 42.6v353.1c0 26.4-22.3 58.9-52.8 73.1L611.6 949.7c-12.2 6.1-20.3 8.1-30.4 8.1z m280-560.1L611.6 529.6c-16.2 8.1-26.4 24.4-26.4 32.5v349.1c2 0 4.1-2 6.1-2l249.6-131.9c16.2-8.1 26.4-24.4 26.4-32.5V395.7c-2 0-4 2-6.1 2z m0 0"  />
+      </svg>
+  </span>
+  <h4 class="text-md px-4 py-2">NO RELATED PRODUCTS</h4>
+</div>
+
+
+
+
