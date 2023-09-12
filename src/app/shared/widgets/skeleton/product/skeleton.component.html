@@ -1,0 +1,29 @@
+
+<section class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mb-10 bg-white mx-auto max-w-[1300px]">
+  <aside 
+  class="col-span-1 md:col-span-1 lg:col-span-1 mb-4
+  fixed top-0 right-0 w-[350px] md:w-auto bg-[#f8f8f8] z-[98] h-full drop-shadow-lg md:drop-shadow-none md:static hidden md:block"
+  >
+  <div class="bg-white h-full p-3 md:mr-6 overflow-auto">
+      <app-asideskeleton
+      *ngFor="let skeleton of asideSkeletons"
+        ></app-asideskeleton>
+  </div>
+  </aside>
+    
+
+    <article class="col-span-1 md:col-span-2 lg:col-span-3">
+      <div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">            
+           <app-cardskeleton
+           *ngFor="let skeleton of prodSkeletons"
+           ></app-cardskeleton>
+        </div>
+      </div>
+    </article>
+</section>
+
+
+
+
+   

@@ -6,6 +6,8 @@
   </div>
 </section>
 
+<app-skeleton *ngIf="!error && isLoading"></app-skeleton>
+
 <ng-template #empty>
     <section class="flex justify-center items-center h-[60vh]">
         <div class="text-gray-500 flex flex-col justify-center items-center">
@@ -27,14 +29,11 @@
         <span class="sr-only">Loading...</span>
     </div>
   </div>
+
   
   <section class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 bg-white" *ngIf="products.length>0 && !isLoading; else empty">
       <aside class="col-span-1 md:col-span-1 lg:col-span-1 mb-4">
-        <!-- <app-filter [products]="products" [category]="category">
-        </app-filter>    -->
-        <ng-template>
-          <div class="flex justify-center">No filters</div>
-        </ng-template>
+        
       </aside>
       <article class="col-span-1 md:col-span-2 lg:col-span-3">        
         <div class="mb-4">

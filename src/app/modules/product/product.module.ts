@@ -10,7 +10,7 @@ import { BreadcrumbComponent } from 'src/app/core/components/breadcrumb/breadcru
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { PricefilterComponent } from './components/product/filter/pricefilter/pricefilter.component';
 import { ProgressDirective } from './components/product/filter/pricefilter/directive/progress.directive';
-
+import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
   declarations: [
     ProductComponent,
@@ -26,9 +26,10 @@ import { ProgressDirective } from './components/product/filter/pricefilter/direc
     CommonModule,
     ProductRoutingModule,
     FormsModule, 
-    ReactiveFormsModule
-
-  ]
+    ReactiveFormsModule,
+    SharedModule
+  ],
+  
 })
 export class ProductModule { 
 }

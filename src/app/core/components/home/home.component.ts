@@ -10,6 +10,9 @@ import { ProductService } from 'src/app/modules/product/services/product.service
 })
 export class HomeComponent implements OnInit{
   products:Product[]=[];
+  skeletons:number[]=[...new Array(6)];
+  error!:string;
+  isLoading=false;
   images:string[]=[
     // "https://images.unsplash.com/photo-1523381294911-8d3cead13475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
     // "https://www.creativefabrica.com/wp-content/uploads/2021/05/15/Quote-T-shirt-design-001-Graphics-12041380-1.jpg",
@@ -28,10 +31,14 @@ export class HomeComponent implements OnInit{
    this.newArrivalProducts();
   }
   newArrivalProducts(){
+    this.isLoading=true;
     const startIndex=Math.round(Math.random()*20);
     const lastIndex=startIndex+6;
     this._productService.get.subscribe(data=>{
+      this.isLoading=false;
       this.products=data.slice(startIndex,lastIndex);
-    });
+    },
+    error=>this.error=error.message
+    );
   }
 }

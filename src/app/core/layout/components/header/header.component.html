@@ -1,6 +1,6 @@
 <header class="mb-4">
   <nav class="px-2 md:px-6 lg:px-10 md:py-2">
-    <div class="flex justify-between items-center">
+    <div class="flex justify-between items-center pt-2 md:pt-0">
         <a routerLink="/" class="flex flex-col items-center cursor-pointer">
           <img src="assets/images/logo.png" alt="brand" class="w-[40px] md:w-[50px]" />
           <span class="text-sm font-semibold text-white bg-[#3c64a9] px-3 rounded rotate-6 hidden md:block">
@@ -123,7 +123,7 @@
 
   <nav>
     <div class="mt-2 border-b border-gray-300 md:hidden">
-      <ul class="flex justify-center flex-wrap text-xs uppercase">
+      <ul class="flex justify-start flex-wrap text-xs uppercase px-2">
         <li class="my-2" *ngFor="let menu of menulist">
           <a
             class="px-1 py-1 transition-all duration-900"

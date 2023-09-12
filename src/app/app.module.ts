@@ -16,7 +16,7 @@ import { Page404Component } from './core/components/page404/page404.component';
 import { SearchresultComponent } from './core/components/searchresult/searchresult.component';
 import { SearchComponent } from './core/layout/components/header/search/search.component';
 import { AuthinterceptorService } from './shared/services/auth/authinterceptor.service';
-
+import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +30,7 @@ import { AuthinterceptorService } from './shared/services/auth/authinterceptor.s
     CartitemComponent,
     Page404Component,
     SearchresultComponent,
-    SearchComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +38,7 @@ import { AuthinterceptorService } from './shared/services/auth/authinterceptor.s
     FormsModule, 
     ReactiveFormsModule,
     AppRoutingModule,
+    SharedModule
   ],
   providers: [
     {

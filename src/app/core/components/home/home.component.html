@@ -4,7 +4,21 @@
     <app-carousel [slideImages]="images"></app-carousel>
     <article class="mb-5">
         <h3 class="text-2xl font-semibold mb-5">NEW ARRIVALS</h3>
-        <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-5">
+
+        <div class="flex justify-center items-center h-[60vh]" *ngIf="error && isLoading">
+            <div class="text-red-500 flex flex-col justify-center items-center">
+              <i class="fa-solid fa-circle-exclamation text-6xl"></i>
+            <h4 class="text-md px-4 py-2">HTTP ERROR Occured</h4>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-5" *ngIf="!error && isLoading">
+            <app-cardskeleton
+            *ngFor="let skeleton of skeletons"
+            ></app-cardskeleton>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-5" *ngIf="!isLoading && products.length>0">
             <div *ngFor="let product of products" class="relative flex flex-row justify-between mx-auto md:flex-col w-full max-w-md bg-white hover:border border-gray-300">
                 <a [routerLink]="['categories','product',product.id]" class="w-[50%] sm:w-[40%] md:w-full overflow-hidden">
                     <img 
@@ -42,8 +56,7 @@
                         </button>
                     </div>
                 </div>
-        </div>
-
+            </div>
         </div>
     </article>
 </section>

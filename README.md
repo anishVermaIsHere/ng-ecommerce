@@ -1,4 +1,4 @@
-# Back 2 Buy - An Ecommerce App built with using Angular 15 + Tailwind.
+# Back 2 Buy - An Ecommerce Frontend App built with using Angular 15 + Tailwind.
 
 **To run application follow these steps**
 
@@ -15,6 +15,27 @@
 6. Now your app will start successfully.
 
 **Screenshots**
+
+**Home Page**
+![1](https://github.com/anishVermaIsHere/ng-ecommerce/assets/97972189/1dbe1847-d41d-4853-8b0a-bc611700ee57)
+
+**Products Page**
+![2](https://github.com/anishVermaIsHere/ng-ecommerce/assets/97972189/eaab9299-6ade-4adb-81e5-3069dd2fe9a1)
+
+![3](https://github.com/anishVermaIsHere/ng-ecommerce/assets/97972189/c1c5ac1a-d282-4d69-becf-df46a508d307)
+
+![4](https://github.com/anishVermaIsHere/ng-ecommerce/assets/97972189/3fa489e4-4342-4516-ba8c-3952b2b4f057)
+
+**Product Details Page**
+![5](https://github.com/anishVermaIsHere/ng-ecommerce/assets/97972189/12b4fd0e-2e98-432b-a91a-298507cb4841)
+
+
+**Cart Page**
+![6](https://github.com/anishVermaIsHere/ng-ecommerce/assets/97972189/1fdb2421-dce8-46f5-99da-937bad842bf3)
+
+
+
+
 
 
 # Basic Information - Angular 

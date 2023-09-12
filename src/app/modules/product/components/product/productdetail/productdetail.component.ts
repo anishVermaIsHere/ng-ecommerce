@@ -74,8 +74,10 @@ export class ProductdetailComponent implements OnInit{
   }
 
   relatedProducts(){
+    this.isLoading=true;
    this.productService.getRelated(this.product.type).subscribe(data=>{
     this.relatedProductList=data.filter((item:Product)=>{
+    this.isLoading=false;
      return this.product.id!==item.id
     });
     });

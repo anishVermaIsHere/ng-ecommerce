@@ -59,17 +59,8 @@
 
             </ng-template>
             
-            
 
             <div class="absolute top-2 left-5 md:right-5 flex justify-end gap-4 items-center">
-                <!-- <button 
-                aria-label="add to cart"
-                class="bg-white border border-gray-300 rounded h-[35px] w-[35px] "
-                title="Add to Cart"
-                >
-                   <i class="fa-solid fa-bag-shopping hover:scale-125 transition-all duration-200"></i>
-                </button> -->
-
                 <span *ngIf="product.stock=='In stock'; else outofstock" class="w-[80px] bg-green-600 text-white text-center text-xs p-1 rounded">
                     {{product.stock}}
                 </span>
